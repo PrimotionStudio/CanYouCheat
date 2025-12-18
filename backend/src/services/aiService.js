@@ -4,13 +4,23 @@ const FormData = require("form-data");
 const AI_SERVICE_URL = process.env.AI_SERVICE_URL || "http://localhost:8000";
 
 async function verifyFacesWithAI(liveImageBase64, referenceImageBase64) {
-  const url = `${AI_SERVICE_URL}/verify_faces/`;
-  const payload = {
-    img1_base64: liveImageBase64,
-    img2_base64: referenceImageBase64,
-  };
-  const response = await axios.post(url, payload, { timeout: 50000 });
-  return response.data;
+  try {
+    const url = `${AI_SERVICE_URL}/verify_faces/`;
+    const payload = {
+      img1_base64: liveImageBase64,
+      img2_base64: referenceImageBase64,
+    };
+
+    const response = await axios.post(url, payload, { timeout: 50000 });
+    return response.data;
+  } catch (error) {
+    if (!error.response) {
+      console.error("❌ Likely CORS or network error:", error.message);
+    } else {
+      console.error("❌ API error:", error.response.status, error.response.data);
+    }
+    throw error;
+  }
 }
 
 // ✅ FIX: Convert base64 to file and send as multipart/form-data
