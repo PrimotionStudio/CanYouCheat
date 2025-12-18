@@ -47,6 +47,9 @@ app.use("/api/proctoring", require("./routes/proctoringRoutes"));
 // Dashboard routes - ADD THIS LINE
 app.use("/api", require("./routes/dashboardRoutes"));
 
+// Correct Dashboard routes according to frontend
+app.use("/api/dashboard", require("./routes/dashboardRoutes"));
+
 // Health check endpoint for AI proctoring system
 app.get("/", (req, res) => {
   res.json({
