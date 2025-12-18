@@ -1,0 +1,624 @@
+/* Base Layout */
+.auth-page {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8fafc;
+  padding: 1rem;
+}
+
+.auth-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.gradient-overlay {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+}
+
+/* Container */
+.auth-container {
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  min-height: 580px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+
+/* Branding Side */
+.auth-branding {
+  flex: 1;
+  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+  color: white;
+  padding: 2.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-content {
+  max-width: 350px;
+  text-align: center;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.logo-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.logo-icon img {
+  
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #3b82f6 0%, #565b6d 100%);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.25); */
+}
+
+.brand-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0;
+  color: white;
+}
+
+.brand-subtitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.brand-description {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 1.5rem;
+}
+
+.features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  text-align: left;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.feature-item::before {
+  content: "✓";
+  width: 18px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
+  font-weight: 600;
+}
+
+/* Form Side */
+.auth-form-container {
+  flex: 1;
+  padding: 2.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 380px;
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.card-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 0.375rem 0;
+}
+
+.card-subtitle {
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* Form Elements */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  background: white;
+  box-sizing: border-box;
+  color: #111827;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-input::placeholder {
+  color: #9ca3af;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  font-weight: 500;
+}
+
+.password-toggle:hover {
+  color: #374151;
+}
+
+/* Role Selection */
+.role-selection {
+  margin-top: 0.375rem;
+}
+
+.role-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.625rem;
+}
+
+.role-option {
+  position: relative;
+  cursor: pointer;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 0.875rem;
+  transition: all 0.2s ease;
+  display: block;
+  background: #f9fafb;
+}
+
+.role-option:hover {
+  border-color: #3b82f6;
+  background: #f0f9ff;
+}
+
+.role-option.active {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+
+.role-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.role-content {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.role-title {
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.875rem;
+}
+
+.role-option.active .role-title {
+  color: #1e40af;
+}
+
+/* Submit Button */
+.submit-btn {
+  width: 100%;
+  padding: 0.8125rem 1rem;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 46px;
+  margin-top: 0.5rem;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.25);
+}
+
+.submit-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Password Strength */
+.password-strength {
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+
+.password-strength.weak { color: #ef4444; }
+.password-strength.medium { color: #f59e0b; }
+.password-strength.strong { color: #10b981; }
+
+/* Error Message */
+.error-message {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Footer */
+.card-footer {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.footer-text {
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.footer-link {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+  color: #2563eb;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .auth-container {
+    flex-direction: column;
+    max-width: 500px;
+    min-height: auto;
+  }
+  
+  .auth-branding {
+    padding: 2rem 1.5rem;
+    flex: none;
+  }
+  
+  .auth-form-container {
+    padding: 2rem 1.5rem;
+  }
+  
+  .role-options {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .auth-page {
+    padding: 0.5rem;
+  }
+  
+  .auth-container {
+    border-radius: 8px;
+  }
+  
+  .brand-title {
+    font-size: 1.5rem;
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+  }
+  
+  .auth-branding,
+  .auth-form-container {
+    padding: 1.5rem 1rem;
+  }
+  
+  .features-list {
+    gap: 0.5rem;
+  }
+  
+  .feature-item {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-height: 700px) {
+  .auth-container {
+    min-height: auto;
+  }
+  
+  .brand-description {
+    display: none;
+  }
+  
+  .features-list {
+    gap: 0.375rem;
+  }
+  
+  .card-header {
+    margin-bottom: 1.25rem;
+  }
+}
+
+/* Focus States */
+.form-input:focus-visible,
+.role-option:focus-visible,
+.submit-btn:focus-visible,
+.footer-link:focus-visible,
+.password-toggle:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Active state indicator for role selection */
+.role-option.active::after {
+  content: '';
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 8px;
+  height: 8px;
+  background: #3b82f6;
+  border-radius: 50%;
+}
+
+/* Loading state */
+.submit-btn.loading {
+  pointer-events: none;
+}
+
+/* Improved visual hierarchy */
+.form-group:last-of-type {
+  margin-bottom: 0.5rem;
+}
+
+/* Better contrast for better readability */
+.role-title {
+  color: #1f2937;
+}
+
+.role-option.active .role-title {
+  color: #1e40af;
+  font-weight: 700;
+}
+
+
+/* ============================= */
+/* Webcam Capture Section Styles */
+/* ============================= */
+
+.camera-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background:  white;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.webcam-view {
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 4 / 3;
+  border-radius: 10px;
+  border: 2px solid #3b82f6;
+  object-fit: cover;
+  background: #f9fafb;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.capture-btn,
+.cancel-btn,
+.retake-btn {
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+  width: 100%;
+  max-width: 200px;
+  margin-top: 0.5rem;
+}
+
+/* Primary Capture Button */
+.capture-btn {
+  background: #3b82f6;
+  color: white;
+}
+
+.capture-btn:hover {
+  background: #2563eb;
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Cancel Button */
+.cancel-btn {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.cancel-btn:hover {
+  background: #e5e7eb;
+}
+
+/* Retake Button (after capture) */
+.retake-btn {
+  background: #1353c9;
+  color: white;
+}
+
+.retake-btn:hover {
+  background: #d97706;
+}
+
+/* Captured Preview */
+.captured-preview {
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 4 / 3;
+  border-radius: 10px;
+  border: 2px solid #3b82f6;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Smooth fade-in for camera UI */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 640px) {
+  .camera-section {
+    padding: 1.25rem;
+  }
+
+  .webcam-view,
+  .captured-preview {
+    max-width: 100%;
+  }
+
+  .capture-btn,
+  .cancel-btn,
+  .retake-btn {
+    max-width: 100%;
+  }
+}
+/* Fix: Center Retake Photo button like Capture Image */
+.form-group .retake-btn {
+  display: block;
+  margin: 0 110px 0 auto;
+  width: 100%;
+  max-width: 200px;
+  text-align: center;
+}
