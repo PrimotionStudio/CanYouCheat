@@ -30,12 +30,9 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "*",
-        "http://localhost:3000",
-        "http://localhost:5000",
-        "https://canyoucheat-ai-module.onrender.com/",
-        "https://canyoucheat-backend-module.vercel.app/",
-        "https://canyoucheat-frontend-module.vercel.app/",
+        "https://canyoucheat-frontend-module.vercel.app",
+        "https://canyoucheat-backend-module.vercel.app",
+        "https://canyoucheat-ai-module.onrender.com",
     ],
     allow_credentials=True,
     allow_methods=["*"],
