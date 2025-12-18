@@ -1,38 +1,42 @@
-# Use Python 3.10
-FROM python:3.10
+# 1. Use a 'slim' image to reduce base bloat
+FROM python:3.10-slim
 
-# Set working directory
+# 2. Set environment variables to optimize Python/Pip behavior
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DEFAULT_TIMEOUT=1000
+
 WORKDIR /code
 
-# Install system dependencies for OpenCV and DeepFace
-# FIX: Replaced 'libgl1-mesa-glx' (deprecated) with 'libgl1'
-RUN apt-get update && apt-get install -y \
+# 3. Install system dependencies (added build-essential for cmake/deepface)
+RUN apt-get update && apt-get install -y --no-install-recommends \
     ffmpeg \
     libsm6 \
     libxext6 \
     cmake \
     libgl1 \
+    build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements and install them
-COPY requirements.txt /code/requirements.txt
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
-
-# Copy the rest of the application
-COPY app /code/app
-
-# Copy weights/models
-COPY yolov8n.pt /code/yolov8n.pt
-# COPY weights /code/weights  <-- Uncomment if you uploaded the weights folder
-
-# Create a non-root user (Required by Hugging Face)
+# 4. Upgrade pip and set up the user FIRST
+RUN pip install --upgrade pip
 RUN useradd -m -u 1000 user
+
+# 5. Install requirements as the root user BEFORE switching
+# This helps avoid permission issues with large package extractions
+COPY requirements.txt /code/requirements.txt
+RUN pip install -r /code/requirements.txt
+
+# 6. Copy application and weights
+COPY app /code/app
+COPY yolov8n.pt /code/yolov8n.pt
+
+# 7. Switch to non-root user
 USER user
 ENV HOME=/home/user \
     PATH=/home/user/.local/bin:$PATH
 
-# Expose port 7860 (Hugging Face default)
 EXPOSE 7860
 
-# Start the app
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "7860"]
