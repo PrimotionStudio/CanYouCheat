@@ -14,6 +14,7 @@ async function verifyFacesWithAI(liveImageBase64, referenceImageBase64) {
     const response = await axios.post(url, payload, { timeout: 50000 });
     return response.data;
   } catch (error) {
+    console.log("❌ Error occurred:", error);
     if (!error.response) {
       console.error("❌ Likely CORS or network error:", error.message);
     } else {
