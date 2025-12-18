@@ -13,7 +13,7 @@ connectDB();
 // Enable CORS with specific origins for AI proctoring security
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "https://canyoucheat-frontend-module.vercel.app" || "http://localhost:3000",
+    origin: [process.env.FRONTEND_URL || "https://canyoucheat-frontend-module.vercel.app" || "http://localhost:3000"],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
