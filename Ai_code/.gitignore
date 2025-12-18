@@ -9,4 +9,4 @@ __pycache__/
 node_modules
 L2CSNet_gaze360.pkl
 package-lock.json
-yolov8n.pt
+#yolov8n.pt
