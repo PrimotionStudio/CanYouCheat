@@ -30,6 +30,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        "*",
         "https://can-you-cheat.vercel.app/",
         "https://canyoucheat.onrender.com",
         "http://localhost:3000",
@@ -76,12 +77,12 @@ async def verify_faces_endpoint(payload: FacePayload):
     """Face verification endpoint"""
     try:
         logger.info("🔍 Face verification request received")
-        
+
         result = verify_faces(payload.img1_base64, payload.img2_base64)
-        
+
         logger.info("✅ Face verification completed")
         return result
-        
+
     except Exception as e:
         logger.error(f"❌ Face verification error: {str(e)}")
         logger.error(traceback.format_exc())
@@ -92,28 +93,28 @@ async def proctor_route(file: UploadFile = File(...)):
     """Main proctoring endpoint"""
     try:
         logger.info("🤖 Proctoring analysis request received")
-        
+
         # Read image file
         image_data = await file.read()
-        
+
         # Convert to numpy array for processing
         import cv2
         import numpy as np
         nparr = np.frombuffer(image_data, np.uint8)
         frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-        
+
         if frame is None:
             raise HTTPException(status_code=400, detail="Invalid image data")
-        
+
         logger.info(f"✅ Image processed: {frame.shape}")
-        
+
         # Initialize results
         results = {
             "face_count": {"face_count": 0, "bounding_boxes": []},
             "object_detection": {"detections": []},
             "audio_analysis": {"noise_level": 0, "speech_detected": False}
         }
-        
+
         # Face detection
         try:
             face_result = count_faces(frame)
@@ -122,7 +123,7 @@ async def proctor_route(file: UploadFile = File(...)):
         except Exception as e:
             logger.error(f"❌ Face detection error: {str(e)}")
             results["face_count"]["error"] = str(e)
-        
+
         # Object detection
         try:
             object_result = detect_objects(frame)
@@ -131,17 +132,17 @@ async def proctor_route(file: UploadFile = File(...)):
         except Exception as e:
             logger.error(f"❌ Object detection error: {str(e)}")
             results["object_detection"]["error"] = str(e)
-        
+
         response = ProctoringResponse(
             success=True,
             face_count=results["face_count"],
             object_detection=results["object_detection"],
             audio_analysis=results["audio_analysis"]
         )
-        
+
         logger.info("✅ Proctoring analysis completed successfully")
         return response
-        
+
     except HTTPException:
         raise
     except Exception as e:
