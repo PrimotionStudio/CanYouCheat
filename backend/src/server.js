@@ -13,10 +13,7 @@ connectDB();
 
 // CORS Configuration for Production
 const corsOptions = {
-  origin: [
-    process.env.FRONTEND_URL || "https://canyoucheat-frontend-module.vercel.app" || "https://can-you-cheat.vercel.app/",
-    "http://localhost:3000", // For development
-  ],
+  origin: [process.env.FRONTEND_URL, "https://canyoucheat-frontend-module.vercel.app"],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
