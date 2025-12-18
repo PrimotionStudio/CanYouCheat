@@ -11,7 +11,7 @@ async function verifyFacesWithAI(liveImageBase64, referenceImageBase64) {
       img2_base64: referenceImageBase64,
     };
 
-    const response = await axios.post(url, payload, { timeout: 50000 });
+    const response = await axios.post(url, payload, { timeout: 20000 });
     return response.data;
   } catch (error) {
     console.log("❌ Error occurred:", error);
