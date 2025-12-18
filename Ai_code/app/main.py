@@ -31,10 +31,11 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "*",
-        "https://can-you-cheat.vercel.app/",
-        "https://canyoucheat.onrender.com",
         "http://localhost:3000",
-        "http://localhost:5000"
+        "http://localhost:5000",
+        "https://canyoucheat-ai-module.onrender.com/",
+        "https://canyoucheat-backend-module.vercel.app/",
+        "https://canyoucheat-frontend-module.vercel.app/",
     ],
     allow_credentials=True,
     allow_methods=["*"],
