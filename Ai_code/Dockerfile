@@ -28,12 +28,18 @@ RUN useradd -m -u 1000 user
 COPY requirements.txt /code/requirements.txt
 RUN pip install -r /code/requirements.txt
 
-# 6. Copy application and weights
+# 6. Copy application, weights, and startup script
 COPY app /code/app
 COPY yolov8n.pt /code/yolov8n.pt
 
-# 7. Switch to non-root user
+# 7. Pre-download DeepFace models as root (before switching to user)
+# This ensures models are downloaded during build, not at runtime
+COPY app/startup.py /code/startup.py
+RUN python /code/startup.py
+
+# 8. Switch to non-root user
 USER user
+
 ENV HOME=/home/user \
     PATH=/home/user/.local/bin:$PATH
 
